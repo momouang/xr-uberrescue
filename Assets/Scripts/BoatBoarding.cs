@@ -18,6 +18,7 @@ public class BoatBoarding : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.transform.parent.SetParent(null);
+            PlayerEvents.ResetRotation();
         }
     }
 }

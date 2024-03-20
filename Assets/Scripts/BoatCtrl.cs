@@ -9,6 +9,12 @@ public class BoatCtrl : MonoBehaviour
     Transform boat, directionPointer;
 
     [SerializeField]
+    CharacterController controller;
+
+    [SerializeField]
+    Rigidbody rb;
+
+    [SerializeField]
     TMP_Text speedText;
 
     public float TopSpeed = 5f;
@@ -39,14 +45,16 @@ public class BoatCtrl : MonoBehaviour
         currentSpeed = Mathf.Lerp(currentSpeed, newSpeed, SpeedRate);
 
         Vector3 newPosition = boat.forward * currentSpeed * TopSpeed * Time.deltaTime;
-        transform.position += newPosition;
+        //transform.position += newPosition;
+        controller.Move(newPosition);
+        //rb.velocity = newPosition;
 
         UpdateDisplays();
     }
 
     void UpdateDisplays()
     {
-        speedText.text = ((int)(AssignedSpeed * 200)).ToString("D3");
+        speedText.text = ((int)(AssignedSpeed * 100)).ToString("D3");
     }
 
     public void SetAssignedSpeed(float _value) => AssignedSpeed = _value;
