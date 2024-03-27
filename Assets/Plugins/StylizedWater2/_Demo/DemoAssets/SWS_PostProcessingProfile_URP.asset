@@ -20,6 +20,28 @@ MonoBehaviour:
   contribution:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &-1776451452127682508
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 1
+  lift:
+    m_OverrideState: 1
+    m_Value: {x: 0.17695695, y: 0.82499945, z: 1, w: 0.069504775}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 0.94618255, y: 0.9545154, z: 1, w: -0.14769755}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 0.87226796, y: 0.97450465, z: 1, w: -0.39965257}
 --- !u!114 &-375731980102376670
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -66,6 +88,7 @@ MonoBehaviour:
   - {fileID: -5682964868260359006}
   - {fileID: 5336876406982169967}
   - {fileID: -375731980102376670}
+  - {fileID: -1776451452127682508}
 --- !u!114 &5336876406982169967
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -87,7 +110,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.272
   smoothness:
     m_OverrideState: 0
     m_Value: 0.2
@@ -110,6 +133,30 @@ MonoBehaviour:
   mode:
     m_OverrideState: 1
     m_Value: 2
+  neutralHDRRangeReductionMode:
+    m_OverrideState: 0
+    m_Value: 2
+  acesPreset:
+    m_OverrideState: 0
+    m_Value: 3
+  hueShiftAmount:
+    m_OverrideState: 0
+    m_Value: 0
+  detectPaperWhite:
+    m_OverrideState: 0
+    m_Value: 0
+  paperWhite:
+    m_OverrideState: 0
+    m_Value: 300
+  detectBrightnessLimits:
+    m_OverrideState: 0
+    m_Value: 1
+  minNits:
+    m_OverrideState: 0
+    m_Value: 0.005
+  maxNits:
+    m_OverrideState: 0
+    m_Value: 1000
 --- !u!114 &8597436511959479946
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -123,6 +170,9 @@ MonoBehaviour:
   m_Name: Bloom
   m_EditorClassIdentifier: 
   active: 1
+  skipIterations:
+    m_OverrideState: 0
+    m_Value: 1
   threshold:
     m_OverrideState: 0
     m_Value: 1
@@ -141,9 +191,12 @@ MonoBehaviour:
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
-  skipIterations:
+  downscale:
     m_OverrideState: 0
-    m_Value: 1
+    m_Value: 0
+  maxIterations:
+    m_OverrideState: 0
+    m_Value: 6
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
