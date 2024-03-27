@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using StylizedWater2;
 
 class PlayerEvents
 {
@@ -11,6 +12,11 @@ class PlayerEvents
 
 public class Player : MonoBehaviour
 {
+    public AlignToWaves waveLevel;
+    public bool isSwimming = false;
+    public Transform cameraPosition;
+
+
     private void OnEnable() {
         PlayerEvents.ResetRotationEvent += ResetRotation;
     }
@@ -30,6 +36,11 @@ public class Player : MonoBehaviour
 
     float horizontal, vertical;
 
+    private void Start()
+    {
+        waveLevel.enabled = false;
+    }
+
     private void Update() 
     {
         horizontal = walkInputAction.action.ReadValue<Vector2>().x;
@@ -41,6 +52,17 @@ public class Player : MonoBehaviour
         
         if(jumpInputAction.action.WasPressedThisFrame())
             Jump();
+
+        if(cameraPosition.position.y < 0 && !isSwimming)
+        {
+            //Swim();
+            isSwimming = true;
+        }
+        else
+        {
+            ResetRotation();
+            isSwimming = false;
+        }
     }
 
     void Move(Vector3 movement)
@@ -52,6 +74,13 @@ public class Player : MonoBehaviour
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce);
+    }
+
+    void Swim()
+    {
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        waveLevel.enabled = true;
     }
 
     private void ResetRotation()
