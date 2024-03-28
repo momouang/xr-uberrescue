@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using StylizedWater2;
 
+public enum PlayerStates
+{
+    Walk,
+    Float,
+    Swim,
+}
+
 class PlayerEvents
 {
     public static event System.Action ResetRotationEvent;
@@ -12,9 +19,8 @@ class PlayerEvents
 
 public class Player : MonoBehaviour
 {
-    public AlignToWaves waveLevel;
-    public bool isSwimming = false;
     public Transform cameraPosition;
+    public PlayerStates currentState = PlayerStates.Walk;
 
 
     private void OnEnable() {
@@ -29,17 +35,12 @@ public class Player : MonoBehaviour
 
     public Rigidbody rb;
 
-    public float speed = 1f, jumpForce = 5f;
+    public float speed = 1f, jumpForce = 5f, swimForce = 100f;
 
     public InputActionProperty walkInputAction;
-    public InputActionProperty jumpInputAction;
+    public InputActionProperty rightPaddleAction, leftPaddleAction;
 
     float horizontal, vertical;
-
-    private void Start()
-    {
-        waveLevel.enabled = false;
-    }
 
     private void Update() 
     {
@@ -49,20 +50,51 @@ public class Player : MonoBehaviour
         Vector3 movement = (playerHead.right * horizontal + playerHead.forward * vertical) * speed;
         
         Move(movement);
-        
-        if(jumpInputAction.action.WasPressedThisFrame())
-            Jump();
 
-        if(cameraPosition.position.y < 0 && !isSwimming)
+        if (rightPaddleAction.action.WasPressedThisFrame())
+            PaddleRemapping();
+
+        if (leftPaddleAction.action.WasPerformedThisFrame())
+            PaddleRemapping();
+    }
+
+    void CheckCurrentState()
+    {
+        if(transform.position.y>0)
         {
-            //Swim();
-            isSwimming = true;
+            if(currentState!= PlayerStates.Walk)
+            {
+                currentState = PlayerStates.Walk;
+                SwitchState(currentState);
+            }
+        }
+        else if(transform.position.y<=0 && playerHead.position.y>.2f)
+        {
+            currentState = PlayerStates.Float;
         }
         else
         {
-            ResetRotation();
-            isSwimming = false;
+            currentState = PlayerStates.Swim;
         }
+    }
+
+    void SwitchState(PlayerStates state)
+    {
+        switch (state)
+        {
+            case PlayerStates.Walk:
+                rb.drag = 0;
+                rb.useGravity = true;
+                break;
+        }
+    }
+
+    void PaddleRemapping()
+    {
+        if(currentState==PlayerStates.Walk)
+            Jump();
+        else
+            Swim();
     }
 
     void Move(Vector3 movement)
@@ -80,7 +112,6 @@ public class Player : MonoBehaviour
     {
         rb.useGravity = false;
         rb.isKinematic = true;
-        waveLevel.enabled = true;
     }
 
     private void ResetRotation()
