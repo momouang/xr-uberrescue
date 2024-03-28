@@ -31,25 +31,36 @@ public class BoatCtrl : MonoBehaviour
     [SerializeField]
     float currentSpeed = 0f;
 
+    public bool EngineOn = false;
+    
     [SerializeField]
     bool goForward = true;
 
     private void FixedUpdate()
     {
-        float newDirection = AssignedDirection - 0.5f;
+        if (EngineOn)
+            BoatMovement(AssignedSpeed, AssignedDirection);
+        else
+            BoatMovement(0, .5f);
+
+        
+        UpdateDisplays();
+    }
+
+    void BoatMovement(float _speed, float _direction)
+    {
+        float newDirection = _direction - 0.5f;
         newDirection *= TopRotate;
         directionPointer.localEulerAngles = new Vector3(0f, newDirection, 0f);
         boat.rotation = Quaternion.Lerp(boat.rotation, directionPointer.rotation, RotateRate);
 
-        float newSpeed = (goForward) ? AssignedSpeed : -AssignedSpeed;
+        float newSpeed = (goForward) ? _speed : -_speed;
         currentSpeed = Mathf.Lerp(currentSpeed, newSpeed, SpeedRate);
 
         Vector3 newPosition = boat.forward * currentSpeed * TopSpeed * Time.deltaTime;
         //transform.position += newPosition;
         controller.Move(newPosition);
         //rb.velocity = newPosition;
-
-        UpdateDisplays();
     }
 
     void UpdateDisplays()
