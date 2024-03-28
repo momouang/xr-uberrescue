@@ -13,6 +13,9 @@ public class VictimScript : MonoBehaviour
     float currentTime = 0f;
     AlignToWaves waterLevel;
 
+    public ParticleSystem ghostParticle;
+    public bool isDead = false;
+
     float gravity = 1f;
 
     private void Start()
@@ -24,6 +27,13 @@ public class VictimScript : MonoBehaviour
 
     private void Update()
     {
+        if(isDead)
+        {
+            currentTime = lifeTime;
+            waterLevel.heightOffset -= Time.deltaTime * (lifeTime * 0.5f);
+            return;
+        }
+
         if(gameObject.transform.position.y <= 1)
         {
             waterLevel.enabled = true;
@@ -33,8 +43,8 @@ public class VictimScript : MonoBehaviour
 
             if (currentTime >= lifeTime)
             {
-                currentTime = lifeTime;
-                waterLevel.heightOffset -= Time.deltaTime * (lifeTime * 0.5f);
+                
+                isDead = true;
                 StartCoroutine(StartDeath());
             }
         }
@@ -46,12 +56,19 @@ public class VictimScript : MonoBehaviour
 
     }
 
+
+    void PlayParticle()
+    {
+        ghostParticle.Play();
+        Debug.Log("Particle Played");
+    }
+
     IEnumerator StartDeath()
     {
+        PlayParticle();
         yield return new WaitForSeconds(2f);
-        Debug.Log("Destroyed");
         SendRating();
-        Destroy(gameObject);
+        //Destroy(gameObject);
 
     }
 

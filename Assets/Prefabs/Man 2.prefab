@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 6368846573804516422}
   - component: {fileID: 3693110012615156}
   m_Layer: 0
-  m_Name: Man
+  m_Name: Man 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5256,19 +5256,19 @@ PrefabInstance:
     - target: {fileID: 13700004, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5a93608b3e08a0f43b28b75f42ad8e06, type: 2}
+      objectReference: {fileID: 2100000, guid: 032ce1fbf28bb5c4aad37d379b23abd3, type: 2}
     - target: {fileID: 13700006, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8beec0b0169cc9a459e8012a8cb16edc, type: 2}
+      objectReference: {fileID: 2100000, guid: 0539cb79729d97f439f8eef69eeff41a, type: 2}
     - target: {fileID: 13700008, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c6813dda0c64cb34f8e4a9f4caf00c86, type: 2}
+      objectReference: {fileID: 2100000, guid: 032ce1fbf28bb5c4aad37d379b23abd3, type: 2}
     - target: {fileID: 13700010, guid: 11de9d883ba29e7408300ad1c2cc424b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c6813dda0c64cb34f8e4a9f4caf00c86, type: 2}
+      objectReference: {fileID: 2100000, guid: 032ce1fbf28bb5c4aad37d379b23abd3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

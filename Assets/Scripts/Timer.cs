@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class Timer : MonoBehaviour
 {
+    public static Action OnTimeUp;
+
     public Transform lookatTarget;
 
     public float time = 30f;
     public bool isCounting = false;
+    public bool isTimeUp = false;
 
     public TextMeshPro text;
 
     void Start()
     {
-        isCounting = true;
+        isCounting = false;
     }
 
 
@@ -30,9 +34,11 @@ public class Timer : MonoBehaviour
             }
             else
             {
+                OnTimeUp?.Invoke();
                 Debug.Log("Time Up");
                 time = 0;
                 isCounting = false;
+                isTimeUp = true;
             }
         }
     }

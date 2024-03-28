@@ -6,20 +6,17 @@ public class Radar : MonoBehaviour
 {
     private Transform sweepTransform;
     private float rotationSpeed;
-    private float radarDistance;
 
     private void Awake()
     {
         sweepTransform = transform.Find("Sweep");
         rotationSpeed = 180f;
-        radarDistance = 1f;
 
     }
 
     private void FixedUpdate()
     {
         sweepTransform.eulerAngles -= new Vector3(0, 0, rotationSpeed * Time.deltaTime);
-
     }
 
 
